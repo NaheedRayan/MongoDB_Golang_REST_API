@@ -144,6 +144,7 @@ go test ./repository
 - [MongoDB Driver](https://github.com/mongodb/mongo-go-driver)
 - [Chi Router](https://github.com/go-chi/chi)
 - [Godotenv](https://github.com/joho/godotenv)
+- [uuid google](https://github.com/google/uuid)
 
 ---
 
