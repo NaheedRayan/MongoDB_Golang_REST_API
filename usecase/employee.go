@@ -21,6 +21,8 @@ type Response struct {
 	Error string      `json:"error,omitempty"`
 }
 
+
+//------------------- Handler functions -------------------//
 func (svc *EmployeeService) CreateEmployee(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 
