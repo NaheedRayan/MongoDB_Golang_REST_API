@@ -55,12 +55,12 @@ func main() {
 	r := chi.NewRouter()
 	r.Use(middleware.Logger)
 
-	r.HandleFunc("/employees", empService.CreateEmployee)
-	r.HandleFunc("/employees/{id}", empService.GetEmployeeByID)
-	r.HandleFunc("/employees", empService.GetAllEmployee)
-	r.HandleFunc("/employees/{id}", empService.UpdateEmployeeByID)
-	r.HandleFunc("/employees/{id}", empService.DeleteEmployeeByID)
-	r.HandleFunc("/employees", empService.DeleteAllEmployee)
+	r.Post("/employees", empService.CreateEmployee)
+	r.Get("/employees/{id}", empService.GetEmployeeByID)
+	r.Get("/employees", empService.GetAllEmployee)
+	r.Put("/employees/{id}", empService.UpdateEmployeeByID)
+	r.Delete("/employees/{id}", empService.DeleteEmployeeByID)
+	r.Delete("/employees", empService.DeleteAllEmployee)
 
 
 	r.Get("/", func(w http.ResponseWriter, r *http.Request) {
