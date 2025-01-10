@@ -4,8 +4,8 @@ import (
 	"context"
 
 	"github.com/naheedrayan/mongodb_golang_rest_api/model"
-	"go.mongodb.org/mongo-driver/v2/bson"
-	"go.mongodb.org/mongo-driver/v2/mongo"
+	"go.mongodb.org/mongo-driver/bson"
+	"go.mongodb.org/mongo-driver/mongo"
 )
 
 type EmployeeRepo struct{
@@ -18,12 +18,12 @@ func (e *EmployeeRepo) InsertEmployee(emp *model.Employee) (interface{}, error) 
 	if err != nil {
 		return nil, err
 	}
-	return result , nil
+	return result.InsertedID , nil
 }
 
 func (e *EmployeeRepo) FindEmployeeByID(id string) (*model.Employee, error) {
 	var emp model.Employee
-	err := e.MongoCollection.FindOne(context.Background(), bson.D{{"employee_id", id}}).Decode(&emp)
+	err := e.MongoCollection.FindOne(context.Background(), bson.D{{Key: "employee_id", Value: id}}).Decode(&emp)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (e *EmployeeRepo) FindAllEmployee() ([]*model.Employee, error) {
 
 
 func (e *EmployeeRepo) UpdateEmployeeByID(empID string, updatedEmp *model.Employee) (int64, error) {
-	result, err := e.MongoCollection.UpdateOne(context.Background(), bson.D{{"employee_id", empID}}, bson.D{{"$set", updatedEmp}})
+	result, err := e.MongoCollection.UpdateOne(context.Background(), bson.D{{Key: "employee_id", Value: empID}}, bson.D{{Key: "$set", Value: updatedEmp}})
 	if err != nil {
 		return 0, err
 	}
@@ -55,7 +55,7 @@ func (e *EmployeeRepo) UpdateEmployeeByID(empID string, updatedEmp *model.Employ
 }
 
 func (e *EmployeeRepo) DeleteEmployeeByID(empID string) (int64, error) {
-	result, err := e.MongoCollection.DeleteOne(context.Background(), bson.D{{"employee_id", empID}})
+	result, err := e.MongoCollection.DeleteOne(context.Background(), bson.D{{Key: "employee_id", Value: empID}})
 	if err != nil {
 		return 0, err
 	}
